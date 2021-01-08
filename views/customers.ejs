@@ -1,0 +1,31 @@
+<%- include("partials/header") %>
+
+<div class="container">
+  <% if(error && error.length > 0){ %>
+      <div class="alert alert-danger" role="alert">
+          <%= error %>
+      </div>
+  <% } %>
+</div>
+
+<div class="container">
+  <h1 class="pt-5" style="text-align: center;">Choose Sender</h1>
+    <div class="input-group mb-3 gentle-flex">
+
+      </div>
+      <form action="/transaction" method="GET">
+        <select class="custom-select custom-select-lg" id="inputGroupSelect01" name="sender">
+          <% customers.forEach(function(customer){ %>
+          <option><%= customer.name %>, Balance: <%= customer.balance %></option>
+          <% }) %>
+        </select>
+        <div class="pt-3">
+        <button type="submit" class="btn btn-light button">Next</button>
+        </div>
+      </form>
+
+    </div>
+</div>
+
+
+<%- include("partials/footer") %>

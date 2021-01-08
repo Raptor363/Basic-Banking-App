@@ -1,0 +1,116 @@
+body{
+	background-image: url(https://images.unsplash.com/photo-1496307653780-42ee777d4833?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: 'Raleway', sans-serif;
+}
+
+h1{
+	font-family: 'Libre Baskerville', serif;
+}
+
+h5{
+	padding-top: 3px;
+	font-weight: bold;
+}
+.main{
+	justify-content: center;
+	align-items: center;
+  }
+
+img {
+	max-width: 100%;
+	height: auto;
+	margin-left: 50px;
+}
+.gentle-flex {
+	display: flex;
+	margin-top: 150px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1ch;
+  }
+  .gentle-flex2 {
+	display: flex;
+	margin-top: 80px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1ch;
+  }
+  input[type=text] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: none;
+	background-color: #000000;
+	color: white;
+  }
+
+input[type=number] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: none;
+	background-color: #000000;
+	color: white;
+}
+
+select {
+	width: 100%;
+	padding: 16px 20px;
+	border: none;
+	border-radius: 4px;
+	background-color: #f1f1f1;
+}
+
+.button {
+	background-color: #000000;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	-webkit-transition-duration: 0.4s; 
+	transition-duration: 0.4s;
+  }
+
+.button:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+#customers {
+	font-family: 'Raleway', sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 10;
+}
+
+#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #000000;
+	color: white;
+}
+
+::placeholder {
+	color: rgb(255, 255, 255);
+	opacity: 1; 
+}

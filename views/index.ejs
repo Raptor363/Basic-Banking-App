@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<div class="container">
+    <% if(success && success.length > 0){ %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+    <% } %>
+</div>
+
+<section class="container-fluid px-0">
+<div class="row align-items-center content">
+    <div class="col-md-6 order-2 order-md-1 mt-5">
+        <img src="undraw_transfer_money_rywa.svg" alt="">
+    </div>
+    <div class="col-md-6 text-center order-1 order-md-2">
+        <div class="row justify-content-center">
+            <div class="col-10 col-lg-8 blurb mb-5 mb-md-0 mt-0">
+                <h1>Welcome to Speed Bank</h1>
+                <p>Tranfer money to anyone in no time.</p>
+                <a href="/customers" class="btn btn-light button">Customers</a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,20 @@
+<%- include("partials/header") %>
+
+<div class="container main mt-5">
+    <table id="customers" style="width:100%">
+        <tr>
+          <th>Sender</th>
+          <th>Receiver</th>
+          <th>Transfer Amount</th>
+        </tr>
+        <% transactions.forEach(function(details){ %>   
+        <tr>
+          <td><%= details.sender %></td>
+          <td><%= details.receiver %></td>
+          <td><%= details.amount %></td>
+        </tr>
+        <tr>
+        <% }) %>
+      </table>
+</div>
+<%- include("partials/footer") %>

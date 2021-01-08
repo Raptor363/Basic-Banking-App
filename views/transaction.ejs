@@ -1,0 +1,29 @@
+<%- include("partials/header") %>
+<h1 class="pt-5" style="text-align: center;">Transaction</h1>
+
+<div class="container main">
+
+    <div class="input-group mb-3 gentle-flex2">
+
+        <form action="/history" class="form-group" method="POST">
+
+          <h5>Sender Details: </h5>
+          <input type="text" name="sender" value="<%=sender%> <%=senderBal%>" readonly>
+          <h5 class="mt-2">Select Receiver: </h5>
+          <select class="custom-select custom-select-lg" id="inputGroupSelect01" name="receiver">
+            <% customers.forEach(function(customer){ %>
+            <option><%= customer.name %>, Balance: <%= customer.balance %></option>
+            <% }) %>
+          </select>
+          
+
+          <input type="number" name="amount" placeholder="Enter the amount here" min="1">
+          <button type="submit" class="btn btn-light button">Transfer</button>
+
+        </form>
+
+      </div>
+
+</div>
+
+<%- include("partials/footer") %>
