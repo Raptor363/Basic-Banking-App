@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const session = require("express-session");
 const flash = require("connect-flash");
+const dotenv = require('dotenv');
+dotenv.config();
+const url = process.env.MONGOLAB_URI;
 
 const port = process.env.PORT || 3000;
 
@@ -13,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 
-mongoose.connect(process.env.DATABASEURL, {
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
     })
@@ -47,6 +50,7 @@ const transferSchema = new mongoose.Schema({
     amount: Number
 });
 
+// console.log(url);
 const Customer = mongoose.model("Customer", customerSchema);
 
 const Transaction = mongoose.model("Transaction", transferSchema);
