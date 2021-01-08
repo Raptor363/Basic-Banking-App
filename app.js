@@ -14,17 +14,18 @@ const port = process.env.PORT || 3000;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static('public'));
+app.use(express.static(__dirname + "/public"));
 
 mongoose.connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
     })
 .then(() => console.log('Connected to DB!'))
 .catch(error => console.log(error.message));
 
 app.use(require("express-session")({
-    secret:  "secreeet",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
 }));
@@ -165,51 +166,49 @@ app.post("/history", (req, res) => {
     // console.log(amount, senderName, senderBal, receiverName, receiverBal);
     if(amount > senderBal){
         req.flash("error", "Transaction Failed! Not enough balance.");
-        res.redirect("/customers");
-    } else {
-        const senderName = sender.split(" ", 1)[0];
-        const receiver = req.body.receiver;
-        const receiverName = receiver.split("," , 1)[0];
-        const j = receiver.indexOf(":");
-        const receiverBal = Number(receiver.substr(j+1)) + amount
-        const history = {sender: senderName, receiver: receiverName, amount: amount};
+        return res.redirect("/customers");
+    }
+    const senderName = sender.split(" ", 1)[0];
+    const receiver = req.body.receiver;
+    const receiverName = receiver.split("," , 1)[0];
+    const j = receiver.indexOf(":");
+    const receiverBal = Number(receiver.substr(j+1)) + amount
+    const history = {sender: senderName, receiver: receiverName, amount: amount};
 
-        Customer.findOneAndUpdate({"name": senderName},{"balance": senderBal}, {upsert: true}, function(err, doc) {
-            if (err) return res.send(500, {error: err});
-            console.log("Save!");
-        });
-        Customer.findOneAndUpdate({"name": receiverName}, {"balance": receiverBal}, {upsert: true}, function(err, doc) {
-            if (err) return res.send(500, {error: err});
-            console.log("Save!");
-        });
-        console.log(senderName, senderBal, receiverName, receiverBal);
-        Transaction.create(history, function(err, transaction){
+    Customer.findOneAndUpdate({"name": senderName},{"balance": senderBal}, {upsert: true}, function(err, doc) {
+        if (err) return res.send(500, {error: err});
+        console.log("Save!");
+    });
+    Customer.findOneAndUpdate({"name": receiverName}, {"balance": receiverBal}, {upsert: true}, function(err, doc) {
+        if (err) return res.send(500, {error: err});
+        console.log("Save!");
+    });
+    console.log(senderName, senderBal, receiverName, receiverBal);
+    Transaction.create(history, function(err, transaction){
+        if(err){
+            return res.redirect("/customers");
+        }
+        Transaction.find({}, function(err, transactions){
             if(err){
                 res.redirect("/customers");
             } else {
-                Transaction.find({}, function(err, transactions){
-                    if(err){
-                        res.redirect("/customers");
-                    } else {
-                        req.flash("success", "Transaction Successful!");
-                        res.redirect("/");
-                    }
-                })
+                req.flash("success", "Transaction Successful!");
+                res.redirect("/");
             }
         })
-    }
+        
+    })
 });
 
 app.get("/history", function(req, res){
     Transaction.find({}, function(err, transactions){
         if(err){
-            res.redirect("/transaction");
-        } else {
-            res.render("history", {transactions: transactions});
+            return res.redirect("/transaction");
         }
+        res.render("history", {transactions: transactions});
     })
 });
 
 app.listen(port, () => {
-    console.log('App is listening on port 3000!');
+    console.log(`App is listening on port ${port}`);
 })
