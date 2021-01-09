@@ -25,7 +25,7 @@ mongoose.connect(url, {
 .catch(error => console.log(error.message));
 
 app.use(require("express-session")({
-    secret: process.env.SECRET,
+    secret: "Shuushh it's a secret",
     resave: false,
     saveUninitialized: false
 }));
