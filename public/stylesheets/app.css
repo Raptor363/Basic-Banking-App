@@ -114,3 +114,12 @@ select {
 	color: rgb(255, 255, 255);
 	opacity: 1; 
 }
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: rgb(187, 187, 187);
+	color: rgb(0, 0, 0);
+	text-align: center;
+  }
