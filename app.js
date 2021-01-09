@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
-const session = require("express-session");
+// const session = require("express-session");
 const flash = require("connect-flash");
 const dotenv = require('dotenv');
 dotenv.config();
