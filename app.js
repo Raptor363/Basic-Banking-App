@@ -123,6 +123,23 @@ const Transaction = mongoose.model("Transaction", transferSchema);
 //     }
 // ]);
 
+Customer.remove({"name" : "Jack"});
+Customer.remove({"name" : "Felix"});
+Customer.remove({"name" : "Dennis"});
+Customer.remove({"name" : "Maria"});
+Customer.remove({"name" : "Ania"});
+Customer.remove({"name" : "Chris"});
+Customer.remove({"name" : "Terry"});
+Customer.remove({"name" : "Winter"});
+Customer.remove({"name" : "Mina"});
+Customer.remove({"name" : "Patrick"});
+
+Transaction.remove({"sender" : "Jack"})
+Transaction.remove({"sender" : "Felix"})
+Transaction.remove({"sender" : "Terry"})
+Transaction.remove({"sender" : "Dennis"})
+
+
 app.get('/', (req, res) => {
     Customer.find({}, function(err){
         if(err){
@@ -184,6 +201,11 @@ app.post("/history", (req, res) => {
         console.log("Save!");
     });
     console.log(senderName, senderBal, receiverName, receiverBal);
+
+    if(senderName === receiverName){
+        req.flash("error", "Invalid Transaction");
+        return res.redirect("/customers");
+    }
     Transaction.create(history, function(err, transaction){
         if(err){
             return res.redirect("/customers");
